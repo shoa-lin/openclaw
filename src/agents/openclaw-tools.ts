@@ -16,7 +16,7 @@ import { createSessionsHistoryTool } from "./tools/sessions-history-tool.js";
 import { createSessionsListTool } from "./tools/sessions-list-tool.js";
 import { createSessionsSendTool } from "./tools/sessions-send-tool.js";
 import { createSessionsSpawnTool } from "./tools/sessions-spawn-tool.js";
-import { createWebFetchTool, createWebSearchTool } from "./tools/web-tools.js";
+import { createWebFetchTool, createWebSearchPrimeTool, createWebSearchTool } from "./tools/web-tools.js";
 import { createTtsTool } from "./tools/tts-tool.js";
 
 export function createOpenClawTools(options?: {
@@ -63,6 +63,10 @@ export function createOpenClawTools(options?: {
       })
     : null;
   const webSearchTool = createWebSearchTool({
+    config: options?.config,
+    sandboxed: options?.sandboxed,
+  });
+  const webSearchPrimeTool = createWebSearchPrimeTool({
     config: options?.config,
     sandboxed: options?.sandboxed,
   });
@@ -135,6 +139,7 @@ export function createOpenClawTools(options?: {
       config: options?.config,
     }),
     ...(webSearchTool ? [webSearchTool] : []),
+    ...(webSearchPrimeTool ? [webSearchPrimeTool] : []),
     ...(webFetchTool ? [webFetchTool] : []),
     ...(imageTool ? [imageTool] : []),
   ];

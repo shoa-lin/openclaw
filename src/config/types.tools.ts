@@ -356,6 +356,19 @@ export type ToolsConfig = {
         model?: string;
       };
     };
+    /** GLM web-search-prime configuration (MCP-based web search). */
+    searchPrime?: {
+      /** Enable web-search-prime tool (default: true when API key is present). */
+      enabled?: boolean;
+      /** GLM API key (optional; defaults to GLM_API_KEY or ZHIPU_API_KEY env var). */
+      apiKey?: string;
+      /** MCP server URL (default: https://open.bigmodel.cn/api/mcp/web_search_prime/mcp). */
+      url?: string;
+      /** Timeout in seconds for MCP requests. */
+      timeoutSeconds?: number;
+      /** Cache TTL in minutes for search results. */
+      cacheTtlMinutes?: number;
+    };
     fetch?: {
       /** Enable web fetch tool (default: true). */
       enabled?: boolean;
