@@ -370,7 +370,9 @@ export function createWebSearchPrimeTool(options?: {
         };
 
         if (results.length > 0) {
-          payload.results = results;
+          // GLM API does not support a count parameter; truncate client-side.
+          payload.results = results.slice(0, count);
+          payload.count = payload.results.length;
         } else if (raw) {
           payload.content = raw;
         }
@@ -400,7 +402,9 @@ export function createWebSearchPrimeTool(options?: {
           };
 
           if (results.length > 0) {
-            payload.results = results;
+            // GLM API does not support a count parameter; truncate client-side.
+            payload.results = results.slice(0, count);
+            payload.count = payload.results.length;
           } else if (raw) {
             payload.content = raw;
           }
